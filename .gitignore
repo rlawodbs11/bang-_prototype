@@ -1,0 +1,10 @@
+node_modules/
+dist/
+client/dist/
+server/dist/
+.DS_Store
+agant.md
+shared:types.ts
+*.log
+.env
+.env.*

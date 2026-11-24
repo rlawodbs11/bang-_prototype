@@ -1,0 +1,20 @@
+{
+  "name": "bang-monorepo",
+  "private": true,
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client \"npm run dev -w server\" \"npm run dev -w client\"",
+    "start": "npm run build && npm run start -w server",
+    "share": "npm run build && concurrently -k -n server,tunnel \"npm run start -w server\" \"cloudflared tunnel --no-autoupdate --url http://localhost:3001\"",
+    "typecheck": "npm run typecheck -w shared && npm run typecheck -w server && npm run typecheck -w client",
+    "test": "npm test -w server",
+    "build": "npm run build -w client"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
